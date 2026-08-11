@@ -1,26 +1,86 @@
 # AI Red-Team Dashboard
 
-A compact Python command-line dashboard for running two AI evaluation workflows from one interface:
+**A lightweight AI evaluation toolkit for authorized red-team testing, model-behavior checks, and structured probabilistic analysis.**
 
-- **Red-team testing** with PyRIT against an OpenAI-compatible model endpoint.
-- **Probabilistic forecasting** with structured prompts that emphasize probabilities, base rates, constraints, counterarguments, and revision indicators.
+This repository is the **Community Edition**: a compact Python CLI that connects to an OpenAI-compatible endpoint, runs a PyRIT prompt-sending attack flow, and provides a separate probability-focused forecasting mode.
 
-The project is intentionally small. It provides one shared configuration path, one primary CLI, and a compatibility entry point for red-team-only runs.
+For teams that need more than the public CLI, commercial packages are available separately for setup, custom test packs, deployment, reporting, and authorized AI red-team assessments.
 
-> **Authorized testing only.** Use the red-team workflow only on models, systems, accounts, and data you are permitted to test.
+**Commercial range:** from low-cost starter deliverables to custom engagements up to **$5,000**.
 
-## Why this project exists
+[View commercial packages and pricing](PRICING.md)
 
-AI testing scripts tend to become fragmented quickly: credentials get duplicated, prompts drift between files, provider settings are hardcoded, and one-off experiments become difficult to reproduce.
+> **Authorized testing only.** Use the red-team workflow only on models, systems, accounts, and data you own or are explicitly permitted to assess.
 
-This repository keeps the workflow simple:
+## What the Community Edition does
 
-1. Configure the model endpoint once with environment variables.
+The public repository gives you a clean starting point for two workflows:
+
+- **AI red-team testing** — run a PyRIT `PromptSendingAttack` against a configured OpenAI-compatible model target.
+- **Probabilistic forecasting** — ask structured questions that request probabilities, base rates, constraints, counterarguments, and revision indicators.
+- **Provider flexibility** — configure the endpoint, key, and model through environment variables rather than hardcoded credentials.
+- **Interactive or direct CLI use** — run from a menu or invoke a mode directly with command-line arguments.
+- **Secret-safe configuration** — credentials stay outside the tracked source files.
+
+## Why this exists
+
+AI testing scripts tend to fragment quickly. Credentials get copied into code, prompts drift across files, provider settings become hardcoded, and experimental runs become difficult to reproduce.
+
+This project keeps the execution layer small and understandable:
+
+1. Configure the model endpoint once.
 2. Choose red-team or forecast mode.
-3. Send the objective or question through the appropriate evaluation path.
-4. Keep secrets outside the repository.
+3. Submit the objective or question.
+4. Review the model output.
+5. Keep secrets outside Git.
 
-It is designed as a lightweight foundation that can later be extended with scoring, result persistence, multiple attack strategies, model comparisons, or a web interface.
+That makes the Community Edition useful for individual researchers, developers, security practitioners, and teams that want a transparent base they can inspect and extend.
+
+## Community vs. commercial
+
+The public repository is intentionally lean. It is not presented as a finished enterprise red-team platform.
+
+**Community Edition — public repository**
+
+- core CLI
+- one PyRIT prompt-sending attack path
+- forecasting mode
+- environment-based configuration
+- terminal output
+- source code for inspection and extension
+
+**Commercial work — delivered separately**
+
+Depending on scope, paid work can include:
+
+- guided setup and configuration
+- curated authorized test packs
+- custom test objectives and evaluation criteria
+- provider/model integration assistance
+- structured result capture and reporting
+- deployment support
+- model-comparison workflows
+- client-specific assessment plans
+- remediation-oriented findings reports
+- review/debrief sessions
+
+Commercial deliverables are scoped per package or engagement and are **not implied to be included in this public repository**.
+
+[See the commercial ladder](PRICING.md)
+
+## Who it is for
+
+The project is aimed at people who need a small, inspectable starting point rather than a large platform:
+
+- AI application developers
+- security engineers
+- AI safety researchers
+- consultants
+- internal risk teams
+- model evaluators
+- technically capable buyers who want a configurable foundation
+
+For organizations that want the testing performed for them rather than a tool to operate themselves, the higher commercial tiers are service-based.
 
 ## Architecture
 
@@ -59,6 +119,8 @@ ai-red-team-dashboard/
 ├── requirements.txt      # Python dependencies
 ├── .env.example          # Environment-variable template; contains no secrets
 ├── .gitignore            # Prevents common local/secrets files from being committed
+├── PRICING.md             # Commercial packages and engagement ladder
+├── SECURITY.md            # Security and responsible-disclosure guidance
 └── README.md              # Project documentation
 ```
 
@@ -260,6 +322,8 @@ If a real credential has ever been committed:
 
 Deleting a secret from the current source file does not remove it from existing Git history.
 
+See [SECURITY.md](SECURITY.md) for project security guidance.
+
 ## Troubleshooting
 
 ### `GROQ_API_KEY is not set`
@@ -311,7 +375,7 @@ Included now:
 - environment-based secret handling,
 - terminal output.
 
-Not yet included:
+Not yet included in the Community Edition:
 
 - persistent scan history,
 - automated scoring or severity classification,
@@ -322,17 +386,25 @@ Not yet included:
 - authentication or multi-user access,
 - CI-based evaluation runs.
 
-## Good next extensions
+## Roadmap
 
-Natural next steps for the project are:
+Natural extensions include:
 
-1. Add structured JSON result storage.
-2. Add multiple PyRIT attack strategies and test categories.
-3. Add deterministic evaluation/scoring criteria.
-4. Add run IDs, timestamps, and audit metadata.
-5. Add side-by-side model comparison.
-6. Add a small web dashboard only after the core evaluation and result schema are stable.
-7. Add automated tests and GitHub Actions.
+1. Structured JSON result storage.
+2. Multiple PyRIT attack strategies and test categories.
+3. Deterministic evaluation/scoring criteria.
+4. Run IDs, timestamps, and audit metadata.
+5. Side-by-side model comparison.
+6. A web dashboard after the evaluation and result schema are stable.
+7. Automated tests and GitHub Actions.
+
+Roadmap items are not promises of inclusion in a specific commercial package unless they are explicitly written into that engagement's scope.
+
+## Commercial inquiries
+
+If you want setup help, a private deliverable, custom testing, or an authorized assessment, review [PRICING.md](PRICING.md) and open a **Commercial inquiry** issue using the repository's issue template.
+
+For sensitive scopes, do not place API keys, private prompts, customer data, credentials, or confidential system details in a public GitHub issue. Use the issue only to establish contact and describe the scope at a high level.
 
 ## Responsible use
 
@@ -340,6 +412,8 @@ This repository is for authorized AI safety testing, evaluation, research, and d
 
 Do not use it to test systems you do not own or have explicit permission to assess. The operator is responsible for the prompts submitted, the target selected, provider terms, data handling, and applicable law.
 
-## License
+## License and commercial rights
 
-No license file is currently included. Until one is added, normal copyright restrictions apply to the repository contents.
+No license file is currently included. The public source is available for inspection through GitHub, but this repository does not state an open-source license grant.
+
+Commercial licensing or separately delivered commercial work can be discussed as part of a scoped engagement. If you plan to rely on the repository for redistribution, resale, or production use, obtain appropriate licensing advice for your situation.
